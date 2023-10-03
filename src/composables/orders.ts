@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export function useOrder () {
-    const API_HOST = 'http://127.0.0.1:8000/api/desktop'
+    const API_HOST = 'https://delivery.sejavisto.digital/api/desktop'
 
     const onList = async (restaurant_id: any) => {
         try {
