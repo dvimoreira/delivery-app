@@ -1,0 +1,5 @@
+provider: github
+private: true
+owner: dvimoreira
+repo: https://github.com/dvimoreira/menucardapio-frontend
+token: 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
