@@ -6,12 +6,12 @@
         </div>
 
         <ul>
-            <li><router-link to="/pedidos" :class="($route.name === 'pedidos') ? 'active' : ''">Pedidos</router-link></li>
-            <li><router-link to="/cardapio" :class="($route.name === 'cardapio') ? 'active' : ''">Cardápio</router-link></li>
-            <li><router-link to="/categorias" :class="($route.name === 'categorias') ? 'active' : ''">Categorias</router-link></li>
-            <li><router-link to="/areas-entrega" :class="($route.name === 'areas-entrega') ? 'active' : ''">Áreas de Entrega</router-link></li>
-            <li><router-link to="/financeiro" :class="($route.name === 'financeiro') ? 'active' : ''">Financeiro</router-link></li>
-            <li><router-link to="/configuracoes" :class="($route.name === 'configuracoes') ? 'active' : ''">Configurações</router-link></li>
+            <li><router-link to="/painel/pedidos" :class="($route.name === 'pedidos') ? 'active' : ''">Pedidos</router-link></li>
+            <li><router-link to="/painel/cardapio" :class="($route.name === 'cardapio') ? 'active' : ''">Cardápio</router-link></li>
+            <li><router-link to="/painel/categorias" :class="($route.name === 'categorias') ? 'active' : ''">Categorias</router-link></li>
+            <li><router-link to="/painel/areas-entrega" :class="($route.name === 'areas-entrega') ? 'active' : ''">Áreas de Entrega</router-link></li>
+            <li><router-link to="/painel/financeiro" :class="($route.name === 'financeiro') ? 'active' : ''">Financeiro</router-link></li>
+            <li><router-link to="/painel/configuracoes" :class="($route.name === 'configuracoes') ? 'active' : ''">Configurações</router-link></li>
             <!-- <li>{{ state }}</li> -->
         </ul>
     </div>
@@ -41,7 +41,7 @@
     </div>
 
     <div id="layout-content__wrap">
-        <slot />
+        <router-view></router-view>
     </div>
     </div>
 </div>
@@ -70,7 +70,7 @@ const onUpdate = async () => {
     const {updateStatus} = useRestaurant()
     const result = await updateStatus({ restaurant_id: restaurant.id })
 
-    var audio = new Audio('./notification-online.mp3')
+    var audio = new Audio('../assets/notification-online.mp3')
 
     if (result.status === 200) {
         audio.play()

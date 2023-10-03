@@ -31,13 +31,14 @@
     let printersList = ref({})
     const formSync = ref({
         printSelected: '',
+        printSize: 58
     });
     const activeName = ref('first')
 
     const getPrinters = async () => {
         try {
             let result = await ipcRenderer.invoke('get-printers-list')
-            printersList.value = JSON.parse(result)
+            printersList.value = JSON.parse(result.printers)
         } catch (e) {
             ElNotification({
                 title: 'Notificação',
@@ -53,13 +54,17 @@
 
     const onSubmit = async () => {
         try {
-            let data = formSync.value.printSelected.replace(/^\s+/g, '');
-            localStorage.setItem('impressora_selecionada', data)
+            let data = {
+              impressora: formSync.value.printSelected.replace(/^\s+/g, ''),
+              largura: formSync.value.printSize
+            }
+
+            localStorage.setItem('impressora_selecionada', JSON.stringify(data))
 
             ElNotification({
-                title: 'Notificação',
-                message: 'Impressora salva com sucesso!', 
-                type: 'success',
+              title: 'Notificação',
+              message: 'Impressora salva com sucesso!', 
+              type: 'success',
             })
         } catch (e) {
             ElNotification({

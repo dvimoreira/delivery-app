@@ -105,20 +105,19 @@ async function createWindow() {
   // AQUI IMPRIME O PEDIDO
 
   ipcMain.handle('print-data-order', async (event, ...args) => {
-    const newData = args
-    let dataPrint = JSON.parse(newData)
-    let getPrinterName = dataPrint.printer
-    let result = dataPrint.item
+    const newData = args;
+    let dataPrint = JSON.parse(newData);
+    let getPrinterData = JSON.parse(dataPrint.printer);
+    let result = dataPrint.item;
 
     const options: PosPrintOptions = {
       preview: false,
-      margin: '0 0 0 0',
+      margin: "0 10px 0 10px",
       copies: 1,
-      printerName: getPrinterName,
+      printerName: getPrinterData.impressora,
       printBackground: true,
       timeOutPerLine: 400,
-      pageSize: '58mm',
-      boolean: undefined,
+      pageSize: getPrinterData.largura + "mm",
       silent: true
     }
 
@@ -126,47 +125,47 @@ async function createWindow() {
       {
           type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
           value: 'Pedido ' + result.codigo_pedido,
-          style: {fontWeight: "700", textAlign: 'center', fontSize: "24px", marginBottom: "40px"}
+          style: {fontWeight: "700", textAlign: 'center', fontSize: "20px", marginBottom: "40px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Cliente: ' + result.cli_name,
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Telefone: ' + result.phone,
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: (result.tipo_pedido === 'delivery') ? 'Tipo de pedido: Entrega' : 'Tipo de pedido: Comer na Praça',
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: (result.payment_type === 'money') ? 'Forma de Pagamento: Dinheiro' : 'Forma de Pagamento: Cartão',
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Troco para: R$ ' + result.troco,
-        style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Taxa de Entrega: R$ ' + result.total_frete,
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Valor do Pedido: R$ ' + result.total_pedido,
-        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
       },
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Valor Total: R$ ' + result.total_soma,
-        style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "18px"}
+        style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "16px"}
       }
     ]
 
@@ -175,22 +174,22 @@ async function createWindow() {
         {
           type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
           value: 'Endereço: ' + result.rua,
-          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
         },
         {
           type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
           value: 'Bairro: ' + result.bairro,
-          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
         },
         {
           type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
           value: 'Complemento: ' + result.complemento,
-          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "18px"}
+          style: {fontWeight: "400", textAlign: 'left', marginBottom: "5px", fontSize: "16px"}
         },
         {
           type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
           value: 'CEP: ' + result.cep,
-          style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "18px"}
+          style: {fontWeight: "400", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "16px"}
         }
       )
     }
@@ -210,7 +209,7 @@ async function createWindow() {
       {
         type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
         value: 'Observação: ' + result.observacao,
-        style: {fontWeight: "600", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "18px"}
+        style: {fontWeight: "600", textAlign: 'left', borderBottom: "1px solid #000000", paddingBottom: "15px", marginBottom: "30px", fontSize: "16px"}
       },
 
       {

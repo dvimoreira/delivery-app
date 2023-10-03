@@ -7,7 +7,7 @@
   
         <el-col :span="10">
           <div id="layout-auth__view">
-            <slot />
+            <router-view></router-view>
           </div>
         </el-col>
       </el-row>

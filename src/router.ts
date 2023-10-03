@@ -1,49 +1,67 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from './pages/Login.vue'
-import Pedidos from './pages/Pedidos.vue'
-import AreaEntrega from './pages/AreaEntrega.vue'
-import Cardapio from './pages/Cardapio.vue'
-import Categorias from './pages/Categorias.vue'
-import Configuracoes from './pages/Configuracoes.vue'
-import Financeiro from './pages/Financeiro.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'layout.auth',
+    component: () => import(/* webpackChunkName: "layout-default" */ './layouts/Auth.vue'),
+    meta: { auth: false },
+    children: [
+        {
+            path: '',
+            name: 'page.auth',
+            component: () => import(/* webpackChunkName: "page-login" */ './pages/Login.vue'),
+            meta: { auth: false }
+        },
+    ]
+  },
+  {
+    path: '/painel',
+    name: 'layout.default',
+    component: () => import(/* webpackChunkName: "layout-default" */ './layouts/Default.vue'),
+    meta: { auth: true },
+    children: [
+      {
+        path: 'pedidos',
+        name: 'pedidos',
+        component: () => import(/* webpackChunkName: "page-pedidos" */ './pages/Pedidos.vue'),
+        meta: { auth: true }
+      },
+      {
+        path: 'areas-entrega',
+        name: 'areas-entrega',
+        component: () => import(/* webpackChunkName: "page-areas-entrega" */ './pages/AreaEntrega.vue'),
+        meta: { auth: true }
+      },
+      {
+        path: 'cardapio',
+        name: 'cardapio',
+        component: () => import(/* webpackChunkName: "page-cardapio" */ './pages/Cardapio.vue'),
+        meta: { auth: true }
+      },
+      {
+        path: 'categorias',
+        name: 'categorias',
+        component: () => import(/* webpackChunkName: "page-categorias" */ './pages/Categorias.vue'),
+        meta: { auth: true }
+      },
+      {
+        path: 'configuracoes',
+        name: 'configuracoes',
+        component: () => import(/* webpackChunkName: "page-configuracoes" */ './pages/Configuracoes.vue'),
+        meta: { auth: true }
+      },
+      {
+        path: 'financeiro',
+        name: 'financeiro',
+        component: () => import(/* webpackChunkName: "page-financeiro" */ './pages/Financeiro.vue'),
+        meta: { auth: true }
+      }
+    ]
+  }
+]
 
 export default createRouter({
   history: createWebHistory(),
-  routes: [
-    {
-        path: '/',
-        component: Login,
-        meta: { layout: 'Auth' }
-    },
-    {
-      path: '/pedidos',
-      component: Pedidos,
-      meta: { layout: 'Default' }
-    },
-    {
-      path: '/areas-entrega',
-      component: AreaEntrega,
-      meta: { layout: 'Default' }
-    },
-    {
-      path: '/cardapio',
-      component: Cardapio,
-      meta: { layout: 'Default' }
-    },
-    {
-      path: '/categorias',
-      component: Categorias,
-      meta: { layout: 'Default' }
-    },
-    {
-      path: '/configuracoes',
-      component: Configuracoes,
-      meta: { layout: 'Default' }
-    },
-    {
-      path: '/financeiro',
-      component: Financeiro,
-      meta: { layout: 'Default' }
-    }
-  ]
+  routes
 })

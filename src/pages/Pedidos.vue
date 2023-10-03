@@ -84,7 +84,7 @@ import { useOrder } from '../composables/orders'
 
 	const restaurant = JSON.parse(localStorage.getItem('restaurant') as any)
 	const data = ref([])
-	let audio = new Audio('./notification.mp3')
+	let audio = new Audio('../assets/notification.mp3')
 
     const onList = async () => {
         try {
