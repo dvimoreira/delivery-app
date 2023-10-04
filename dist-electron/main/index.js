@@ -38,7 +38,7 @@ if (!electron.app.requestSingleInstanceLock()) {
 let win = null;
 const preload = node_path.join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
-const indexHtml = node_path.join(process.env.DIST, "index.html");
+node_path.join(process.env.DIST, "index.html");
 async function createWindow() {
   win = new electron.BrowserWindow({
     title: "MenuCardápio.Digital",
@@ -224,6 +224,8 @@ async function createWindow() {
     });
   });
   if (process.env.VITE_DEV_SERVER_URL) {
+    console.log(node_path.join(process.env.DIST_ELECTRON, "../dist"));
+    console.log(url);
     win.loadURL(url);
     win.webContents.openDevTools();
     electronUpdater.autoUpdater.updateConfigPath = path__namespace.join(
@@ -232,7 +234,7 @@ async function createWindow() {
       // change path if needed
     );
   } else {
-    win.loadFile(indexHtml);
+    win.loadURL(url);
   }
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
@@ -292,7 +294,7 @@ electron.ipcMain.handle("open-win", (_, arg) => {
       // change path if needed
     );
   } else {
-    childWindow.loadFile(indexHtml, { hash: arg });
+    childWindow.loadURL(`${url}#${arg}`);
   }
 });
 //# sourceMappingURL=index.js.map

@@ -25,7 +25,7 @@
     });
 
 	if (localStorage.getItem('restaurant')) {
-        window.location.href = '/painel/pedidos';
+        window.location.href = '/#/painel/pedidos';
     }
 
 	const onSubmit = async () => {

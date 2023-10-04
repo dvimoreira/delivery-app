@@ -248,6 +248,8 @@ async function createWindow() {
   // AQUI TERMINA DE IMPRIMIR O PEDIDO
 
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
+    console.log(join(process.env.DIST_ELECTRON, '../dist'))
+    console.log(url)
     win.loadURL(url)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()
@@ -257,7 +259,7 @@ async function createWindow() {
       "../dev-app-update.yml" // change path if needed
     );
   } else {
-    win.loadFile(indexHtml)
+    win.loadURL(url)
   }
 
   // Test actively push message to the Electron-Renderer
@@ -330,6 +332,6 @@ ipcMain.handle('open-win', (_, arg) => {
       "../dev-app-update.yml" // change path if needed
     );
   } else {
-    childWindow.loadFile(indexHtml, { hash: arg })
+    childWindow.loadURL(`${url}#${arg}`)
   }
 })

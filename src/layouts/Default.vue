@@ -2,16 +2,16 @@
 <div id="layout-default">
     <div id="layout-default__navigation">
         <div id="layout-default__navigation__logo">
-            <img :src="`http://localhost:8000/logos/${restaurant.logo}`">
+            <img :src="`https://delivery.sejavisto.digital/logos/${restaurant.logo}`">
         </div>
 
         <ul>
-            <li><router-link to="/painel/pedidos" :class="($route.name === 'pedidos') ? 'active' : ''">Pedidos</router-link></li>
-            <li><router-link to="/painel/cardapio" :class="($route.name === 'cardapio') ? 'active' : ''">Cardápio</router-link></li>
-            <li><router-link to="/painel/categorias" :class="($route.name === 'categorias') ? 'active' : ''">Categorias</router-link></li>
-            <li><router-link to="/painel/areas-entrega" :class="($route.name === 'areas-entrega') ? 'active' : ''">Áreas de Entrega</router-link></li>
-            <li><router-link to="/painel/financeiro" :class="($route.name === 'financeiro') ? 'active' : ''">Financeiro</router-link></li>
-            <li><router-link to="/painel/configuracoes" :class="($route.name === 'configuracoes') ? 'active' : ''">Configurações</router-link></li>
+            <li><router-link to="/#/painel/pedidos" :class="($route.name === 'pedidos') ? 'active' : ''">Pedidos</router-link></li>
+            <li><router-link to="/#/painel/cardapio" :class="($route.name === 'cardapio') ? 'active' : ''">Cardápio</router-link></li>
+            <li><router-link to="/#/painel/categorias" :class="($route.name === 'categorias') ? 'active' : ''">Categorias</router-link></li>
+            <li><router-link to="/#/painel/areas-entrega" :class="($route.name === 'areas-entrega') ? 'active' : ''">Áreas de Entrega</router-link></li>
+            <li><router-link to="/#/painel/financeiro" :class="($route.name === 'financeiro') ? 'active' : ''">Financeiro</router-link></li>
+            <li><router-link to="/#/painel/configuracoes" :class="($route.name === 'configuracoes') ? 'active' : ''">Configurações</router-link></li>
             <!-- <li>{{ state }}</li> -->
         </ul>
     </div>
